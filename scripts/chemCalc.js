@@ -720,11 +720,11 @@ function ChemicalEquation(equationText) {
             throw "cannot solve, singular matrix";
         }
         //the solution seems to exist, filling the reagents and products
-        //simultaneously, check for the special case where all the coefficients are zero
-        var allCoeffsAreZero = true;
+        //simultaneously, check for any zero coefficient
+        var anyZeroCoefficient = false;
         for (var s = 0; s < substances.length; s++) {
             var coeff = solved.solution[s];
-            allCoeffsAreZero &= (coeff === 0);
+            anyZeroCoefficient |= (coeff === 0);
             var part = new Participant(substances[s], coeff);
             if (s < equalSignIndex) {
                 this.reagents.push(part);
@@ -732,8 +732,8 @@ function ChemicalEquation(equationText) {
                 this.products.push(part);
             }
         }
-        if (allCoeffsAreZero) {
-            throw "cannot reach material balance: all coefficients are zero";
+        if (anyZeroCoefficient) {
+            throw "cannot solve, zero coefficient found in the solution";
         }
         //checking the material balance
         for (var element of lhsElements) {
