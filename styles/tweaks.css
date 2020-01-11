@@ -1,3 +1,9 @@
+/*main articles with content left w/o id for now*/
+article {
+	max-width: 1000px;
+	margin: auto;
+}
+
 #formula_input,
 #equation_input {
 	border-bottom: none;
