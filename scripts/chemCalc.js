@@ -733,7 +733,7 @@ function ChemicalEquation(equationText) {
             }
         }
         if (anyZeroCoefficient) {
-            throw "cannot solve, zero coefficient found in the solution";
+            throw "cannot reach material balance, zero coefficient in the solution";
         }
         //checking the material balance
         for (var element of lhsElements) {
