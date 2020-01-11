@@ -13,8 +13,3 @@ article {
 #equation_output_products td {
 	vertical-align: middle;
 }
-
-#equation_output_reagents,
-#equation_output_products {
-	min-width: 400px;
-}
