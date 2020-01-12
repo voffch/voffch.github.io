@@ -17,7 +17,7 @@ function clearErroneousInput(node) {
     node.classList.add("w3-border-light-green");
 }
 
-function outputMolarMass(inputID, outTextID, outMassID, outCalcID, outTableID) {
+function outputMolarMass(inputID, outTextID, outMassID, outButtonsID, outCalcID, outTableID) {
     //read the formula
     var inputNode = document.getElementById(inputID);
     var formula = inputNode.value;
@@ -27,10 +27,11 @@ function outputMolarMass(inputID, outTextID, outMassID, outCalcID, outTableID) {
     //init the output nodes
     var outputText = document.getElementById(outTextID);
     var outputMass = document.getElementById(outMassID);
+    var outputButtons = document.getElementById(outButtonsID);
     var outputCalc = document.getElementById(outCalcID);
     var outputTable = document.getElementById(outTableID);
     //hide all output nodes
-    for (var node of [outputText, outputMass, outputCalc, outputTable]) {
+    for (var node of [outputText, outputMass, outputButtons, outputCalc, outputTable]) {
         node.classList.add("w3-hide");
     }
     //clear calc input fields
@@ -68,7 +69,7 @@ function outputMolarMass(inputID, outTextID, outMassID, outCalcID, outTableID) {
         }
         //display all
         clearErroneousInput(inputNode);
-        for (var node of [outputText, outputMass, outputCalc, outputTable]) {
+        for (var node of [outputText, outputMass, outputButtons, outputCalc, outputTable]) {
             node.classList.remove("w3-hide");
         }
     } else {
@@ -79,7 +80,7 @@ function outputMolarMass(inputID, outTextID, outMassID, outCalcID, outTableID) {
     }
 }
 
-function outputChemicalEquation(inputID, outTextID, outReagentsID, outProductsID) {
+function outputChemicalEquation(inputID, outTextID, outReagentsID, outProductsID, outButtonsID) {
     //helper function so as not to duplicate the code
     function fillTableWithParticipants(participantArray, tableNode, inputIDprefix) {
         if (!inputIDprefix) {
@@ -115,8 +116,9 @@ function outputChemicalEquation(inputID, outTextID, outReagentsID, outProductsID
     var reagentTable = document.getElementById(outReagentsID);
     var productsTable = document.getElementById(outProductsID);
     var outputText = document.getElementById(outTextID);
+    var outputButtons = document.getElementById(outButtonsID);
     //hide everything before calculating
-    for (var node of [outputText, reagentTable, productsTable]) {
+    for (var node of [outputText, reagentTable, productsTable, outputButtons]) {
         node.classList.add("w3-hide");
     }
     var equationTextString = inputNode.value;
@@ -138,7 +140,7 @@ function outputChemicalEquation(inputID, outTextID, outReagentsID, outProductsID
         fillTableWithParticipants(equation.reagents, reagentTable, "r");
         fillTableWithParticipants(equation.products, productsTable, "p");
         clearErroneousInput(inputNode);
-        for (var node of [outputText, reagentTable, productsTable]) {
+        for (var node of [outputText, reagentTable, productsTable, outputButtons]) {
             node.classList.remove("w3-hide");
         }
     } else {
@@ -152,7 +154,7 @@ function outputChemicalEquation(inputID, outTextID, outReagentsID, outProductsID
 function equationMassCalculator(callerID) {
     //assuming that callerID is composed of a prefix, "r" or "p" for reagent or product
     //followed by a substance.formula string
-    if (currentChemicalEquation.valid) {
+    if ((typeof(currentChemicalEquation) != "undefined") && currentChemicalEquation.valid) {
         var formula = callerID.substr(1);
         var reagent = (callerID.charAt(0) == "r");
         var mass = Number(document.getElementById(callerID).value);
@@ -194,7 +196,7 @@ function formulaInputKeydown(event) {
 }
 
 function formulaInputBlur() {
-    outputMolarMass("formula_input", "formula_output_text", "formula_output_molar_mass", 
+    outputMolarMass("formula_input", "formula_output_text", "formula_output_molar_mass", "formula_copy_button_container",
                         "formula_output_calculator", "formula_output_table");
 }
 
@@ -229,10 +231,129 @@ function equationInputKeydown(event) {
 }
 
 function equationInputBlur() {
-    outputChemicalEquation("equation_input", "equation_output_text", "equation_output_reagents", "equation_output_products");
+    outputChemicalEquation("equation_input", "equation_output_text", "equation_output_reagents", 
+                                "equation_output_products", "equation_copy_button_container");
 }
 
 function toggleSectionDisplay(sectionID) {
     var section = document.getElementById(sectionID);
     section.classList.toggle("w3-hide");
+}
+
+//clipboard-copying functions
+
+function copyTextToClipboard(html, plainText) {
+    //large part of the solution was suggested by John Henckel on stackoverflow
+    if (!plainText) {
+        plainText = html.replace(/<[^>]+>/g, "");
+    }
+	try {
+		function listener(e) {
+			e.clipboardData.setData("text/html", html);
+			e.clipboardData.setData("text/plain", plainText);
+			e.preventDefault();
+		}
+		document.addEventListener("copy", listener);
+		document.execCommand("copy");
+		document.removeEventListener("copy", listener);
+	} catch (err) {
+		console.log('Unable to copy to clipboard (unsupported by the browser?)');
+	}
+}
+
+function clipboardCopyFormula(whatToCopy) {
+	if ((typeof(currentChemicalSubstance) != "undefined") && currentChemicalSubstance.valid) {
+        switch (whatToCopy) {
+            case "formula":
+                copyTextToClipboard(currentChemicalSubstance.html);
+                break;
+            case "mass":
+                copyTextToClipboard(chemCalc.ftoa(currentChemicalSubstance.molarMass));
+                break;
+            default:
+                break;
+        }
+	}
+}
+
+function clipboardCopyEquation(whatToCopy) {
+
+    //helper function
+    //assuming that ids of inputs are composed of a prefix, "r" or "p" for reagent or product
+    //followed by a substance.formula string
+    //it is not exactly the table that we construct, but should paste to e.g. Excel nicely
+    function constructTable(equation) {
+
+        function constructHeader(what) {
+            var headerParts = [
+                "Coefficient",
+                what,
+                "M, g\u00B7mol<sup>-1</sup>",
+                "Mass, g"
+            ];
+            return "<tr><th>" + headerParts.join("</th><th>") + "</th></tr>";
+        }
+
+        function constructLine(prefix, part) {
+            var input = document.getElementById(prefix + part.substance.formula);
+            var lineParts = [
+                chemCalc.ftoa(part.coefficient),
+                part.substance.html,
+                chemCalc.ftoa(part.substance.molarMass),
+                input.value
+            ];
+            return "<tr><td>" + lineParts.join("</td><td>") + "</td></tr>";
+        }
+
+        var html = "";
+        var plainText = "";
+
+        html += "<table>" + constructHeader("Reagent");
+        for (var part of equation.reagents) {
+            html += constructLine("r", part);
+        }
+        html += constructHeader("Product");
+        for (var part of equation.products) {
+            html += constructLine("p", part);
+        }
+        html += "</table>";
+
+        plainText = html.replace(/<\/th><th>|<\/td><td>/g, "\t");
+        plainText = plainText.replace(/<\/tr><tr>/g, "\n");
+        plainText = plainText.replace(/<[^>]+>/g, "");
+
+        return {
+            html: html,
+            plainText: plainText
+        };
+    }
+
+	if ((typeof(currentChemicalEquation) != "undefined") && currentChemicalEquation.valid) {
+        var htmlText = "";
+        var plainText = "";
+        switch(whatToCopy) {
+            case "equation":
+                htmlText = currentChemicalEquation.html;
+                break;
+            case "table":
+                //this one is tricky: since all the masses are stored in the inputs
+                //inside the table, we cannot just 'copy' the table, hence we reconstruct it
+                var table = constructTable(currentChemicalEquation);
+                htmlText = table.html;
+                plainText = table.plainText;
+                break;
+            case "all":
+                var table = constructTable(currentChemicalEquation);
+                htmlText = currentChemicalEquation.html + "<br>" + table.html;
+                plainText = currentChemicalEquation.html + "\n" + table.plainText;
+                break;
+            default:
+                break;
+        }
+        if (plainText.length == 0) {
+            copyTextToClipboard(htmlText);
+        } else {
+            copyTextToClipboard(htmlText, plainText);
+        }
+	}
 }
