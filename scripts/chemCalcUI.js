@@ -345,7 +345,7 @@ function clipboardCopyEquation(whatToCopy) {
             case "all":
                 var table = constructTable(currentChemicalEquation);
                 htmlText = currentChemicalEquation.html + "<br>" + table.html;
-                plainText = currentChemicalEquation.html + "\n" + table.plainText;
+                plainText = currentChemicalEquation.html.replace(/<[^>]+>/g, "") + "\n" + table.plainText;
                 break;
             default:
                 break;
