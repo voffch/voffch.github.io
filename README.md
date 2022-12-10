@@ -1,3 +1,7 @@
+# ACHTUNG!
+
+This was intended to be a temporary mirror of my gitlab page, the sole reason being that *one country* likes to randomly block domain names. As of now, this repository is **stale**, the page is (should be) unpublished, and in the very unlikely case somebody is reading this, they are advised to check out its gitlab namesake instead. With my commit history, though, there's likely nothing much.
+
 ## Intentions
 This is a static website playground. Basically, I needed somewhere to fiddle with HTML, CSS and JS, and this place looked perfect for the purpose. Besides, you never know when you'll need a website. What if I decided to maintain my own microblog someday? (ha ha fat chance)
 
