@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+const pageTitle = "About";
+---
+<style>
+  .orcid-icon {
+    height: 2rem;
+    width: auto;
+  }
+  .orcid-icon:hover {
+    animation: flip 0.5s ease-in-out;
+  }
+  @keyframes flip {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<BaseLayout pageTitle={pageTitle} displayPageTitle={false} category='about'>
+  <div class="text-center">
+    <p class="display-1">You</p>
+    <p class="display-2">don't</p>
+    <p class="display-3">know</p>
+    <p class="display-4">me</p>
+    <p>and I doubt you'd like to, but since you're already here, here's some info:</p>
+    <p><a href="https://orcid.org/0000-0002-1420-2573" target="_blank"><img src="/img/ORCIDiD_iconvector.svg" class="orcid-icon" /></a></p>
+  </div>
+</BaseLayout>

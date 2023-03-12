@@ -1,0 +1,50 @@
+---
+import BaseLayout from "./Base.astro";
+import Tag from '../components/TagWithCounter.astro';
+const { frontmatter } = Astro.props;
+const allPosts = await Astro.glob('../pages/blog/*.md');
+allPosts.sort((p1, p2) => p1.frontmatter.pubDate > p2.frontmatter.pubDate ? -1 : 1);
+const allPathnames = allPosts.map((post) => post.url);
+const thisPathname = new URL(Astro.url).pathname;
+const blogPathname = "/blog";
+const thisPostIndex = allPathnames.indexOf(thisPathname);
+const nextPathname = allPathnames[thisPostIndex + 1];
+const prevPathname = allPathnames[thisPostIndex - 1];
+---
+<style is:global>
+  .anchor-link {
+    text-decoration: none;
+    opacity: 0.5;
+    transition: all 0.2s;
+  }
+  .anchor-link:hover {
+    opacity: 1.0;
+  }
+  .icon-link::before {
+    content: '#';
+  }
+</style>
+<BaseLayout pageTitle={frontmatter.title} description={frontmatter.description} category='blog'>
+  <p class="text-center text-muted">Published on: {frontmatter.pubDate.slice(0,10)}</p>
+  <slot />
+  <div class="d-flex flex-wrap align-items-center gap-2">
+    <h3>Tags: </h3>
+    {frontmatter.tags.map((tag, i) => (
+        <Tag tag={tag} />
+      )
+    )}
+  </div>
+  <nav aria-label="Post navigation" class="mx-auto mt-3">
+    <ul class="pagination flex-wrap justify-content-center">
+      <li class={"page-item" + (!prevPathname && " disabled")}>
+        <a class="page-link" href={prevPathname}>Newer post</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href={blogPathname}>All posts</a>
+      </li>
+      <li class={"page-item" + (!nextPathname && " disabled")}>
+        <a class="page-link" href={nextPathname}>Older post</a>
+      </li>
+    </ul>
+  </nav>
+</BaseLayout>

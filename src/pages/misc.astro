@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+const pageTitle = "Misc";
+---
+
+<BaseLayout pageTitle={pageTitle} category='misc'>
+  <p class="text-center display-6">A landing page for my various microprojects</p>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title"><i class="bi bi-calculator"></i> ChemCalc</h2>
+      <p class="card-text">A simple chemical calculator for calculating molar masses and balancing chemical equations. Supports fractional indices (e.g., for hydrates and nonstoichiometric compounds). Fully client-side (works offline in your browser). Written in <i class="bi bi-filetype-js"></i> JS, hosted on <i class="bi bi-git"></i> Gitlab Pages.</p>
+      <p class="card-text"><a href="https://chemcalc.xyz/" target="_blank" class="card-link">chemcalc.xyz</a> (or, formerly, <a href="https://voffch.gitlab.io/" target="_blank">voffch.gitlab.io</a> if accessible)</p>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h2 class="card-title"><i class="bi bi-flower1"></i> A Secret Project</h2>
+      <p class="card-text">In a <i class="bi bi-github"></i> Secret Garden grows a secret project, which I won't call by its proper name here because I don't think anything good will come out of its being known to a lot of people.</p>
+      <p class="card-text"><a href="https://voffch.github.io/skotus/" target="_blank" class="card-link">so here's the link</a> (psst! don't tell anybody!)</p>
+    </div>
+  </div>
+  <p class="text-center display-6 mt-3">and submicroprojects</p>
+  <div class="list-group">
+    <a href="/vision#vision-checker" class="list-group-item list-group-item-action">
+      <i class="bi bi-eyeglasses"></i> Test your visual acuity (no, seriously)
+    </a>
+  </div>
+</BaseLayout>

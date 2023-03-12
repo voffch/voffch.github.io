@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+const allPosts = await Astro.glob('../pages/blog/*.md');
+allPosts.sort((p1, p2) => p1.frontmatter.pubDate > p2.frontmatter.pubDate ? -1 : 1);
+const pageTitle = "Blog";
+---
+
+<BaseLayout pageTitle={pageTitle} category='blog'>
+  <p class="text-center display-6">Look, I'm a blogger now!</p>
+  {allPosts.map((post) => <BlogPostCard post={post} />)}
+  <p class="text-center mt-4"><a class="btn btn-outline-primary" href="./tags">See the list of all tags</a></p>
+</BaseLayout>

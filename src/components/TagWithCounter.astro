@@ -1,0 +1,12 @@
+---
+const { tag, count = 0, href, button = true } = Astro.props;
+const path = new URL("/blog/tags/", Astro.url).toString();
+---
+{ button ? (
+  <a class="btn btn-sm btn-outline-dark" href={href ? href : path + tag}>
+    {tag}{count !== 0 ? ' ' : ''}{count !== 0 ? <span class="badge bg-info">{count}</span> : ""}
+  </a>
+  ) : (
+    <a href={href ? href : path + tag}>#{tag}</a>
+  )
+}

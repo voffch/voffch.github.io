@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/Base.astro';
+import BlogPostCard from '../../../components/BlogPostCard.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob('../*.md');
+
+  const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts
+            .filter((post) => post.frontmatter.tags.includes(tag))
+            .sort((p1, p2) => p1.frontmatter.pubDate > p2.frontmatter.pubDate ? -1 : 1);
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={`Posts tagged with "${tag}"`} category='blog'>   
+  {posts.map((post) => <BlogPostCard post={post} />)}
+</BaseLayout>

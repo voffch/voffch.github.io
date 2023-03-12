@@ -1,0 +1,20 @@
+---
+import NavigationLink from "./NavigationLink.astro";
+const { category = '' } = Astro.props;
+---
+<nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom fs-5" aria-label="Navbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="Navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center text-center" id="mainNavbar">
+      <ul class="navbar-nav">
+        <NavigationLink to="/" category="Home" activeCategory={category} />
+        <NavigationLink to="/misc/" category="Misc" activeCategory={category} />
+        <NavigationLink to="/blog/" category="Blog" activeCategory={category} />
+        <NavigationLink to="/about/" category="About" activeCategory={category} />
+      </ul>
+    </div>
+  </div>
+</nav>

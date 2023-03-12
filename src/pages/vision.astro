@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+const pageTitle = "Check your vision";
+const description = 'Simple eyesight checker, a joke included. Not intended to diagnose, if you suspect eyesight troubles, seek professional help';
+---
+<style>
+  /*Sloan typeface is licensed by Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  and is available from GitHub: https://github.com/denispelli/Eye-Chart-Fonts.git*/
+  /* Webfont: Sloan */
+  @font-face {
+      font-family: 'Sloan';
+      src: url('/fonts/Sloan.woff2') format('woff2'), /* Modern Browsers */
+           url('/fonts/Sloan.otf') format('opentype'); /* Safari, Android, iOS */
+               font-style: normal;
+      font-weight: normal;
+      text-rendering: optimizeLegibility;
+  }
+  
+  #vision-checker {
+    min-height: 100vh;
+    margin: 5vh auto;
+    padding: 2rem;
+    /*border: 1px solid darkgray;
+    border-radius: 10px;*/
+    width: fit-content;
+    transition: filter 0.5s;
+  }
+  
+  #vision-checker section {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  #vision-checker section:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
+  
+  #joke-button {
+    display: block;
+    margin: 0 auto 2rem;
+    font-size: 2rem;
+    border: 2px solid darkred;
+    color: red;
+    cursor: pointer;
+    background-color: ghostwhite;
+    transition: 1s all;
+  }
+  
+  #joke-button:hover {
+    color: ghostwhite;
+    background-color: red;
+  }
+  
+  .distort {
+    animation: distort 2s ease-in-out infinite;
+  }
+  
+  @keyframes distort {
+    50% {
+      transform: scale(100.5%) skew(0.5deg, 0.5deg);
+    }
+  }
+  
+  .sloan {
+    margin-top: 1rem;
+    --sloan-highest-font-size: 10.1815mm;/*5.818mm for 40 cm*/
+    font-family: 'Sloan', Verdana, sans-serif;
+    font-size: var(--sloan-highest-font-size);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sloan-row > * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sloan-row {
+    display: flex;
+    align-items: center;
+    margin: 0.2em 0;
+    padding: 0;
+  }
+  
+  .sloan-row p {
+    text-align: center;
+    min-width: calc(var(--sloan-highest-font-size) * 10);
+  }
+  
+  .logmar {
+    font-size: 1rem;
+    letter-spacing: initial;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  .sloan-row:nth-of-type(1) {
+    font-size: 1.0em;
+  }
+  
+  .sloan-row:nth-of-type(2) {
+    font-size: 0.794323067052864em;
+  }
+  
+  .sloan-row:nth-of-type(3) {
+    font-size: 0.6309506497149135em;
+  }
+  
+  .sloan-row:nth-of-type(4) {
+    font-size: 0.5011806177527697em;
+  }
+  
+  .sloan-row:nth-of-type(5) {
+    font-size: 0.39810126482310326em;
+  }
+  
+  .sloan-row:nth-of-type(6) {
+    font-size: 0.31622274887988233em;
+  }
+  
+  .sloan-row:nth-of-type(7) {
+    font-size: 0.25118449448637215em;
+  }
+  
+  .sloan-row:nth-of-type(8) {
+    font-size: 0.19952285419604587em;
+  }
+  
+  .sloan-row:nth-of-type(9) {
+    font-size: 0.15848659551378205em;
+  }
+  
+  .sloan-row:nth-of-type(10) {
+    font-size: 0.1258903570697452em;
+  }
+  
+  .sloan-row:nth-of-type(11) {
+    font-size: 0.09999825478951022em;
+  }
+  
+  .sloan-row:nth-of-type(12) {
+    font-size: 0.07943143203496568em;
+  }
+  
+  .sloan-row:nth-of-type(13) {
+    font-size: 0.06309462660007388em;
+  }
+  
+  .sloan-row:nth-of-type(14) {
+    font-size: 0.05011784206980862em;
+  }
+  
+  input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+  }
+</style>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+  const distanceFromScreen = document.getElementById('distance-from-screen');
+  distanceFromScreen.value = "70";
+  const sloanWrapper = document.querySelector('.sloan');
+  distanceFromScreen.addEventListener('change', changeSloanFontSize);
+  const jokeButton = document.getElementById('joke-button');
+  jokeButton.addEventListener('click', changeBlur);
+  const visionChecker = document.getElementById('vision-checker');
+  visionChecker.style.setProperty('filter', 'blur(2px)');
+  
+  function changeBlur(e) {
+    const filter = visionChecker.style.getPropertyValue('filter');
+    switch (filter) {
+      case 'blur(2px)':
+        visionChecker.style.setProperty('filter', 'blur(5px)');
+        visionChecker.classList.add('distort');
+        e.target.textContent = 'WTF?!';
+        e.target.style.fontSize = '4rem';
+        break;
+      case 'blur(5px)':
+        visionChecker.style.removeProperty('filter');
+        visionChecker.classList.remove('distort');
+        e.target.style.display = 'none';
+        break;
+      default:
+        break;
+    }
+  }
+
+  function changeSloanFontSize(e) {
+    let val = e.target.valueAsNumber;
+    if (!val || val < 40) {
+      val = 40;
+      e.target.value = '40';
+    }
+    let logmar1 = 2 * Math.tan((Math.pow(10, 1.0) * 2.5) / 60 / 180 * Math.PI);
+    logmar1 *= val * 10;
+    sloanWrapper.style.setProperty('--sloan-highest-font-size', logmar1.toString() + 'mm');
+  }
+});
+</script>
+<BaseLayout pageTitle={pageTitle} displayPageTitle={false} category='misc'>
+  <article id='vision-checker'>
+    <section>
+      <button id='joke-button'>HELP! I'm going blind!</button>
+      <label for='distance-from-screen'>Enter the distance from the screen in cm:
+        <input type='number' id='distance-from-screen' value='70' min='40' pattern='\d+' step='5'>
+      </label>
+    </section>
+    <section class='sloan'>
+      <div class="sloan-row"><p>C O H Z V</p><span class="logmar">&nbsp;1.0</span></div>
+      <div class="sloan-row"><p>S Z N D C</p><span class="logmar">&nbsp;0.9</span></div>
+      <div class="sloan-row"><p>V K C N R</p><span class="logmar">&nbsp;0.8</span></div>
+      <div class="sloan-row"><p>K C R H N</p><span class="logmar">&nbsp;0.7</span></div>
+      <div class="sloan-row"><p>Z K D V C</p><span class="logmar">&nbsp;0.6</span></div>
+      <div class="sloan-row"><p>H V O R K</p><span class="logmar">&nbsp;0.5</span></div>
+      <div class="sloan-row"><p>R H S O N</p><span class="logmar">&nbsp;0.4</span></div>
+      <div class="sloan-row"><p>K S V R H</p><span class="logmar">&nbsp;0.3</span></div>
+      <div class="sloan-row"><p>H N K C D</p><span class="logmar">&nbsp;0.2</span></div>
+      <div class="sloan-row"><p>N D V K O</p><span class="logmar">&nbsp;0.1</span></div>
+      <div class="sloan-row"><p>D H O S Z</p><span class="logmar">&nbsp;0.0</span></div>
+      <div class="sloan-row"><p>V R N D O</p><span class="logmar">-0.1</span></div>
+      <div class="sloan-row"><p>C Z H K S</p><span class="logmar">-0.2</span></div>
+      <div class="sloan-row"><p>O R Z S K</p><span class="logmar">-0.3</span></div>
+    </section>
+  </article>
+  <article id='description'>
+    <h2>Visual acuity test</h2>
+    <p>My little joke aside, the <strong>definitely not a medical</strong> test works as follows. First, you should enter the distance (in cm) between your eyes and the screen inside the text field at the top of the page. If you're at an arm's length from the screen, that'd be about 70 cm. Then, pick up the line with the smallest font size that you can still see clearly. If you see the line with '0.0' to the right - congratulations, it is likely that your <a href='https://en.wikipedia.org/wiki/Visual_acuity' target='_blank'>visual acuity</a> is normal. If not - don't panic and see the <a href='/blog/visual-acuity'>accompanying blog post</a>.</p>
+  </article>
+</BaseLayout>

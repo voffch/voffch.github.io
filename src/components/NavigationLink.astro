@@ -1,0 +1,13 @@
+---
+const { to, category, activeCategory } = Astro.props;
+const thisActive = category.toLowerCase() === activeCategory.toLowerCase();
+---
+
+<li class="nav-item px-2">
+  {thisActive ? (
+    <a class="nav-link active" aria-current="page" href={to}>{category}</a>
+  ) : (
+    <a class="nav-link" href={to}>{category}</a>
+  )
+  }
+</li>
