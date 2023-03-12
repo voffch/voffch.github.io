@@ -8,7 +8,7 @@ const tagCounts = uniqueTags.map((tag) => allPosts.filter(post => post.frontmatt
 //const path = Astro.url.pathname;
 ---
 <BaseLayout pageTitle="All tags" category='blog'>   
-  <div class="d-flex flex-wrap align-items-center gap-2">
+  <div class="d-flex justify-content-center flex-wrap align-items-center gap-2">
     {uniqueTags.map((tag, i) => (
         <Tag count={tagCounts[i]} tag={tag} />
       )
