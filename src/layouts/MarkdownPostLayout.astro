@@ -5,7 +5,10 @@ const { frontmatter } = Astro.props;
 const allPosts = await Astro.glob('../pages/blog/*.md');
 allPosts.sort((p1, p2) => p1.frontmatter.pubDate > p2.frontmatter.pubDate ? -1 : 1);
 const allPathnames = allPosts.map((post) => post.url);
-const thisPathname = new URL(Astro.url).pathname;
+let thisPathname = new URL(Astro.url).pathname;
+if (thisPathname.charAt(thisPathname.length - 1) === '/') {
+  thisPathname = thisPathname.slice(0, -1);
+}
 const blogPathname = "/blog";
 const thisPostIndex = allPathnames.indexOf(thisPathname);
 const nextPathname = allPathnames[thisPostIndex + 1];
@@ -47,4 +50,5 @@ const prevPathname = allPathnames[thisPostIndex - 1];
       </li>
     </ul>
   </nav>
+  <p>this: '{thisPathname}'; all: {allPathnames.map((pn) => <span>'{pn}', </span>)}</p>
 </BaseLayout>
