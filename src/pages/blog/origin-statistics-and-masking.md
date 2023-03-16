@@ -42,23 +42,23 @@ int rStart = 1;
 int rEnd = 1;
 int rMasked = IsMasked(1, masked);
 for (int i = 2; i <= masked.getSize(); i++) {
-	if (IsMasked(i, masked) == rMasked) {
-		rEnd++;
-	} else {
-		if (rMasked) {
-			mark -w1 toMask[rStart:rEnd];
-		} else {
-			mark -wd toMask[rStart:rEnd];
-		}
-		rMasked = IsMasked(i, masked);
-		rStart = i;
-		rEnd = i;
-	}
+  if (IsMasked(i, masked) == rMasked) {
+    rEnd++;
+  } else {
+    if (rMasked) {
+      mark -w1 toMask[rStart:rEnd];
+    } else {
+      mark -wd toMask[rStart:rEnd];
+    }
+    rMasked = IsMasked(i, masked);
+    rStart = i;
+    rEnd = i;
+  }
 }
 if (rMasked) {
-	mark -w1 toMask[rStart:masked.getSize()];
+  mark -w1 toMask[rStart:masked.getSize()];
 } else {
-	mark -wd toMask[rStart:masked.getSize()];
+  mark -wd toMask[rStart:masked.getSize()];
 }
 ```
 
@@ -74,17 +74,17 @@ range groups = Col(D);
 int cntr = 0;
 int previousWasMasked = 0;
 for (int i = 1; i <= data.getSize(); i++) {
-	if (!IsMasked(i, data)) {
-		if (!previousWasMasked) {
-			//new range
-			cntr++;
-			previousWasMasked = 1;
-		}
-		groups[i] = cntr;
-	} else {
-		previousWasMasked = 0;
-		groups[i] = 0/0;
-	}
+  if (!IsMasked(i, data)) {
+    if (!previousWasMasked) {
+      //new range
+      cntr++;
+      previousWasMasked = 1;
+    }
+    groups[i] = cntr;
+  } else {
+    previousWasMasked = 0;
+    groups[i] = 0/0;
+  }
 }
 ```
 

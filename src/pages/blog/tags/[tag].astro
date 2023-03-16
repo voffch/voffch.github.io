@@ -24,4 +24,5 @@ const { posts } = Astro.props;
 
 <BaseLayout pageTitle={`Posts tagged with "${tag}"`} category='blog'>   
   {posts.map((post) => <BlogPostCard post={post} />)}
+  <p class="text-center mt-4"><a class="btn btn-outline-primary" href="./">See the list of all tags</a></p>
 </BaseLayout>

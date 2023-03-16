@@ -26,17 +26,22 @@ const prevPathname = allPathnames[thisPostIndex - 1];
   .icon-link::before {
     content: '#';
   }
+  .markdown-post img {
+    max-width: 100%;
+  }
 </style>
 <BaseLayout pageTitle={frontmatter.title} description={frontmatter.description} category='blog'>
   <p class="text-center text-muted">Published on: {frontmatter.pubDate.slice(0,10)}</p>
-  <slot />
-  <div class="d-flex flex-wrap align-items-center gap-2">
-    <h3>Tags: </h3>
-    {frontmatter.tags.map((tag, i) => (
-        <Tag tag={tag} />
-      )
-    )}
-  </div>
+  <article class="markdown-post">
+    <slot />
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <h3>Tags: </h3>
+      {frontmatter.tags.map((tag, i) => (
+          <Tag tag={tag} />
+        )
+      )}
+    </div>
+  </article>
   <nav aria-label="Post navigation" class="mx-auto mt-3">
     <ul class="pagination flex-wrap justify-content-center">
       <li class={"page-item" + (!prevPathname && " disabled")}>
