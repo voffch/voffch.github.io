@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: Origin: statistics for separate data ranges
+title: "Origin: statistics for separate data ranges"
 description: "Explaining how to get the statistics for several manually chosen disjointed segments of some data in OriginLab's Origin software"
 pubDate: 2023-03-16
 tags: ["science", "scripts", "origin"]
