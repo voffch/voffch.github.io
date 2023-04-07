@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>OJS2+Crossref+Crossmark Technical Documentation Page</title>
+  <meta name="description" content="An OJS2+Crossref+Crossmark Technical Documentation Page - a freecodecamp.org certification project">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+body, html {
+  margin: 0;
+}
+:root {
+  font-family: Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.4;
+  font-weight: 16px;
+  --nav-width: 16rem;
+  --max-text-width: 120ch;
+  --color-link-background: #cde1f2;
+  --color-link: #07a;
+}
+nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-right: 2px solid darkgrey;
+  height: 100vh;
+  width: var(--nav-width);
+}
+nav header {
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 0.8rem;
+}
+.drop-link {
+  display: none;
+}
+nav a {
+  color: var(--color-link);
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem 2.1rem;
+  font-size: 1.1rem;
+}
+nav a:hover {
+  background-color: var(--color-link-background);
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+nav li:nth-child(2n) {
+  background-color: aliceblue;
+}
+main {
+  margin-left: calc(var(--nav-width) + 1.5rem);
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  max-width: var(--max-text-width);
+}
+.main-section header {
+  font-size: 1.6rem;
+  padding-top: 1rem;
+}
+.main-section {
+  border-bottom: 1px dotted darkgray;
+}
+.main-section:last-child {
+  border-bottom: none;
+}
+code[class*="language-"], pre[class*="language-"] {
+  white-space: pre-wrap;
+}
+main a {
+  color: var(--color-link);
+  padding: 2px;
+  border-radius: 5px;
+}
+main a:hover {
+  text-decoration: none;
+  background-color: var(--color-link-background);
+  /*! color: black; */
+  transition: all 0.2s;
+}
+main a[target="_blank"]::after
+{
+  content: "";
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+a[role="button"]:hover {
+  cursor: pointer;
+}
+input[type="email"] {
+  text-align: center;
+  width: 30ch;
+}
+main ul, main ol {
+  padding-left: 1rem;
+}
+main ul {
+  list-style-type: disclosure-closed;
+}
+main ul ul {
+  list-style-type: circle;
+}
+.api-list > li {
+  margin-top: 0.4rem;
+}
+.api-list > li:first-child {
+  margin-top: 0;
+}
+.rotating-x {
+  display: inline-block;
+  animation: rot;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 2s;
+}
+@keyframes rot {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.error-message {
+  color: red;
+}
+@media only screen and (max-width: 800px) {
+  .drop-link {
+    display: block;
+    text-align: center;
+  }
+  nav {
+    height: auto;
+    border-right: none;
+    border-bottom: 2px solid lightgray;
+    width: 100vw;
+    background-color: white;
+  }
+  .menu ul {
+    margin: 0;
+    display: none;
+  }
+  .menu a {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+  }
+  .menu:hover ul {
+    display: block;
+  }
+  main {
+    margin-left: 0;
+    margin-top: 6rem;
+  }
+  section {
+    scroll-margin-top: 6rem;
+  }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  function escapeHtml(unsafe) {
+    return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+  }
+
+  const xmlContainer = document.getElementById("api-response");
+  const emailContainer = document.getElementById("email");
+
+  document.querySelectorAll(".api-link").forEach(link => link.addEventListener("click", event => {
+    let doi = event.target.innerHTML;
+    let email = emailContainer.value;
+    if (email && emailContainer.checkValidity()) {
+      let apiParams = new URLSearchParams({ "mailto": email });
+      let url = 'https://api.crossref.org/works/' + doi + '.xml' + '?' + apiParams.toString();
+      console.log(url);
+      xmlContainer.innerHTML = 'Loading... <span class="rotating-x">|</span>';
+      try {
+        fetch(url, {mode: 'cors'})
+        .then((response) => response.text())
+        .then((text) => {
+          xmlContainer.innerHTML = escapeHtml(text);
+          Prism.highlightElement(xmlContainer);
+        });
+      } catch(error) {
+        let errorMsg = xmlContainer.innerHTML = `<span class="error-message">Error: ${error.toString()}</span>`;
+        xmlContainer.innerHTML = errorMsg;
+      }
+    } else {
+      xmlContainer.innerHTML = '<span class="error-message">Please enter a valid email</span>';
+      emailContainer.focus();
+    }
+  }));
+});
+</script>
+</head>
+<body>
+
+<nav id="navbar">
+  <header>OJS2 Crossref</header>
+  <div class="menu">
+    <a class="drop-link">Menu ▼</a>
+    <ul>
+      <li><a class="nav-link" href="#what">What</a></li>
+      <li><a class="nav-link" href="#title_unescaping">Title unescaping</a></li>
+      <li><a class="nav-link" href="#publisher_items">Publisher items</a></li>
+      <li><a class="nav-link" href="#citation_lists">Citation lists</a></li>
+      <li><a class="nav-link" href="#timestamps">Timestamps</a></li>
+      <li><a class="nav-link" href="#adding_crossmark">Adding Crossmark</a></li>
+      <li><a class="nav-link" href="#maintaining_crossmark">Maintaining Crossmark</a></li>
+      <li><a class="nav-link" href="#metadata_examples">Metadata examples</a></li>
+      <li><a class="nav-link" href="#reference_dump">Reference dump</a></li>
+      <li><a class="nav-link" href="../misc">GO BACK</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-doc">
+  <section id="what" class="main-section">
+    <header>What</header>
+    <p>At the moment of writing, <a href="https://docs.pkp.sfu.ca/learning-ojs-2/en/" target="_blank">OJS2</a> is a hopelessly obsolete version of Open Journal Systems CMS. Unfortunately, some people are stuck with it. In turn, <a href="https://www.crossref.org/" target="_blank">Crossref</a> is most likely the agency you register your DOIs with. Crossmark is their version of the "version control" for the digital documents such as articles. Through Crossmark, the major changes such as corrections/retractions can be tracked.</p>
+    <p>In this article, I explain how to correct the xml exported from OJS2 for depositing to Crossref, and also how to add the Crossmark information to the said xml.</p>
+    <p><a href="https://www.crossref.org/documentation/schema-library/markup-guide-record-types/journals-and-articles/" target="_blank">Here</a> is an example of the journal and article deposit xml (without Crossmark elements).</p>
+    <p>Let's assume you have your Crossref export plugin turned on and configured (there isn't much to configure anyway, basically just the contact name and email address), and that you've exported the issue xml via the plugin interface at </p>
+    <pre><code class="language-url">https://OJS-ADDRESS/index.php/JOURNAL-NAME/manager/plugin/importexport/CrossRefExportPlugin/issues</code></pre>
+    <p>Let's also assume that you've read all the official documentation on the Crossref website. This is not a complete guide, but rather a very brief description of my own experience of doing these things.</p>
+    <p>In the following sections, I will review in brief what's wrong with OJS2-generated xmls and how to deal with it. The later sections are devoted to the Crossmark peculiarities.</p>
+  </section>
+  <section id="title_unescaping" class="main-section">
+    <header>Title unescaping</header>
+    <p>Since some version of the Crossref schema, <code class="language-xml">&lt;sub&gt;</code>, <code class="language-xml">&lt;sup&gt;</code>, <code class="language-xml">&lt;i&gt;</code>, etc. tags are all supported by the Crossref, which fact has escaped the OJS2 plugin. The latter html-escapes all the tags in the titles. As a consequence, the titles should be unescaped, with <span>&l</span>t; converted to <code class="language-xml">&lt;</code>, etc., etc.</p>
+  </section>
+  <section id="publisher_items" class="main-section">
+    <header>Publisher items</header>
+    <p>If the journal is using the article numbering scheme as opposed to the traditional "first page - last page" one, Crossref <a href="https://www.crossref.org/documentation/schema-library/markup-guide-metadata-segments/article-ids/">recommends</a> not to use the <code class="language-xml">&lt;first_page&gt;</code> tag (that OJS2 uses by default) to capture the article number, and to use something like</p>
+<pre><code class="language-xml">&lt;publisher_item&gt;
+  &lt;item_number item_number_type=&quot;article_number&quot;&gt;...&lt;/item_number&gt;
+&lt;/publisher_item&gt;</code></pre>
+  <p>Hence the need to correct the original xml by removing the <code class="language-xml">&lt;pages&gt;</code> element altogether and replacing it with the above.</p>
+  </section>
+  <section id="citation_lists" class="main-section">
+    <header>Citation lists</header>
+    <p>OJS2 doesn't support exporting and importing citation lists, like, at all. Even the import/export articles and issues plugin, which, if I'm not mistaken, even exports the graphical abstracts in the xml, has no capability of exporting citations. This is, to put it mildly, irritating. I ended up just grabbing the reference lists from the website, and pasting them in the xml below <code class="language-xml">&lt;/doi_data&gt;</code> in, perhaps, the simplest way as</p>
+<pre><code class="language-xml">&lt;citation_list&gt;
+  &lt;citation key=&quot;ref1&quot;&gt;
+    &lt;doi&gt;...&lt;/doi&gt;
+  &lt;/citation&gt;
+  &lt;citation key=&quot;ref2&quot;&gt;
+    &lt;unstructured_citation&gt;...&lt;/unstructured_citation&gt;
+  &lt;/citation&gt;
+  ...
+&lt;/citation_list&gt;</code></pre>
+  <p>depending on whether the doi is present in or absent from the original citation. There are more complex <code class="language-xml">&lt;citation&gt;</code> formats (<a href="https://www.crossref.org/documentation/schema-library/markup-guide-metadata-segments/references/" target="_blank">see here</a>), but they require more extensive parsing of the original reference texts.</p>
+  </section>
+  <section id="timestamps" class="main-section">
+    <header>Timestamps</header>
+    <p>Yeah, this is why your perfectly (syntactically) valid xml could get rejected by Crossref. In order for the doi record to be updated, the integer inside the <code class="language-xml">&lt;timestamp&gt;</code> in the <code class="language-xml">&lt;head&gt;</code> of the <code class="language-xml">&lt;doi_batch&gt;</code> should be more than it was when the previous record with this particular doi was deposited. The easiest way of ensuring that is just by writing the unix time integer into the <code class="language-xml">&lt;timestamp&gt;</code> each time the xml is updated.</p>
+  </section>
+  <section id="adding_crossmark" class="main-section">
+    <header>Adding Crossmark</header>
+    <p>There's a description of <a href="https://www.crossref.org/documentation/crossmark/" target="_blank">what is Crossmark</a> and a step-by-step guide on <a href="https://www.crossref.org/documentation/crossmark/participating-in-crossmark/" target="_blank">how to participate in it</a>. Regarding the latter, here I'm going to talk about steps two (here) and three (in the <a href="#maintaining_crossmark">following section</a>). The other ones are pretty straightforward; I can only mention that I found it convenient to use the free and crossplatform exiftool to update the pdf metadata.</p>
+    <p>Before we begin:</p>
+    <ul>
+      <li><code class="language-xml">&lt;crossmark&gt;</code> elements should be put after <code class="language-xml">&lt;pages&gt;</code> (or <code class="language-xml">&lt;publisher_item&gt;</code>, if you use them)</li>
+      <li><code class="language-xml">&lt;ai:program&gt;</code> elements should be removed (maybe because the licensing info is now inside the <code class="language-xml">&lt;crossmark&gt;</code> elements)</li>
+    </ul>
+    <p>The basic <code class="language-xml">&lt;crossmark&gt;</code> element is, well, very basic:</p>
+      <pre><code class="language-xml">&lt;crossmark&gt;
+  &lt;crossmark_version&gt;1&lt;/crossmark_version&gt;
+  &lt;crossmark_policy&gt;...&lt;/crossmark_policy&gt;
+  &lt;custom_metadata&gt;
+    &lt;program xmlns=&quot;http://www.crossref.org/AccessIndicators.xsd&quot;&gt;
+      &lt;free_to_read/&gt;
+      &lt;license_ref applies_to=&quot;vor&quot; start_date=&quot;YYYY-MM-DD&quot;&gt;https://creativecommons.org/licenses/by/4.0/&lt;/license_ref&gt;
+    &lt;/program&gt;
+  &lt;/custom_metadata&gt;
+&lt;/crossmark&gt;</code></pre>
+  <p>Here, you only need to modify the crossmark policy doi (not the full url, just doi), YYYY-MM-DD that is basically the online-first date, license type, if you're using something else, and perhaps <code class="language-xml">&lt;free_to_read/&gt;</code> if you're with the greedy people. In the latter case, however, you wouldn't be reading this as you'd have a team of overpaid people at your beck and call solving all your problems and an office in, let's say, Switzerland) but enough of that. Only the date should be modified for each article, the others are journal-specific.</p>
+  </section>
+  <section id="maintaining_crossmark" class="main-section">
+    <header>Maintaining Crossmark</header>
+    <p>This issue arises when an update to the already existing record should be registered. The "recommended way" of doing a major update of the article is by issuing an additional update note with its separate doi, and then link the update note to the original article via Crossmark. There are some examples on Crossref's website on <a href="https://www.crossref.org/documentation/crossmark/crossmark-registering-updates/">registering updates</a> with Crossmark.</p>
+    <p>I did the following. First, I limited the types of updates that we will implement to, perhaps, the most common ones: correction and retraction. Next, as the basic xml remains the same as shown <a href="adding_crossmark">above</a>, the <code class="language-xml">&lt;crossmark&gt;</code> elements of the corrections and retractions should contain additional <code class="language-xml">&lt;updates&gt;</code> elements. For example,</p>
+    <p><strong>for a correction</strong>, the whole <code class="language-xml">&lt;crossmark&gt;</code> would look like</p>
+    <pre><code class="language-xml">&lt;crossmark&gt;
+  &lt;crossmark_version&gt;1&lt;/crossmark_version&gt;
+  &lt;crossmark_policy&gt;...&lt;/crossmark_policy&gt;
+  &lt;updates&gt;
+    &lt;update type=&quot;correction&quot; date=&quot;YYYY-MM-DD&quot;&gt;DOI_OF_SOURCE_ARTICLE&lt;/update&gt;
+  &lt;/updates&gt;
+  &lt;custom_metadata&gt;
+    &lt;program xmlns=&quot;http://www.crossref.org/AccessIndicators.xsd&quot;&gt;
+      &lt;free_to_read/&gt;
+      &lt;license_ref applies_to=&quot;vor&quot; start_date=&quot;YYYY-MM-DD&quot;&gt;https://creativecommons.org/licenses/by/4.0/&lt;/license_ref&gt;
+    &lt;/program&gt;
+  &lt;/custom_metadata&gt;
+&lt;/crossmark&gt;</code></pre>
+    <p><strong>and for a retraction - like</strong></p>
+    <pre><code class="language-xml">&lt;crossmark&gt;
+  &lt;crossmark_version&gt;1&lt;/crossmark_version&gt;
+  &lt;crossmark_policy&gt;...&lt;/crossmark_policy&gt;
+  &lt;updates&gt;
+    &lt;update type=&quot;retraction&quot; date=&quot;YYYY-MM-DD&quot;&gt;DOI_OF_SOURCE_ARTICLE&lt;/update&gt;
+  &lt;/updates&gt;
+  &lt;custom_metadata&gt;
+    &lt;program xmlns=&quot;http://www.crossref.org/AccessIndicators.xsd&quot;&gt;
+      &lt;free_to_read/&gt;
+      &lt;license_ref applies_to=&quot;vor&quot; start_date=&quot;YYYY-MM-DD&quot;&gt;https://creativecommons.org/licenses/by/4.0/&lt;/license_ref&gt;
+    &lt;/program&gt;
+  &lt;/custom_metadata&gt;
+&lt;/crossmark&gt;</code></pre>
+    <p>I suppose that's all that is required. However, I went a bit further and added more links between the original articles and the notes. To the very beginning of <code class="language-xml">&lt;custom_metadata&gt;</code> elements, i.e. as their first children, the following elements could be added:</p>
+    <p><strong>to either correction or retraction note:</strong></p>
+    <pre><code class="language-xml">&lt;assertion group_name=&quot;associated_articles&quot; group_label=&quot;ASSOCIATED ARTICLES&quot; name=&quot;related_article&quot; label=&quot;CrossRef DOI Link to Originating Article:&quot; href=&quot;https://doi.org/DOI_OF_SOURCE_ARTICLE&quot;&gt;https://doi.org/DOI_OF_SOURCE_ARTICLE&lt;/assertion&gt;</code></pre>
+    <p><strong>to the source article (in case of correction):</strong></p>
+    <pre><code class="language-xml">&lt;assertion group_name=&quot;associated_articles&quot; group_label=&quot;ASSOCIATED ARTICLES&quot; name=&quot;related_article&quot; label=&quot;CrossRef DOI Link to Correction:&quot; href=&quot;https://doi.org/DOI_OF_CORRECTION&quot;&gt;https://doi.org/DOI_OF_CORRECTION&lt;/assertion&gt;</code></pre>
+    <p><strong>to the source article (in case of retraction):</strong></p>
+    <pre><code class="language-xml">&lt;assertion group_name=&quot;associated_articles&quot; group_label=&quot;ASSOCIATED ARTICLES&quot; name=&quot;related_article&quot; label=&quot;CrossRef DOI Link to Retraction:&quot; href=&quot;https://doi.org/DOI_OF_RETRACTION&quot;&gt;https://doi.org/DOI_OF_RETRACTION&lt;/assertion&gt;</code></pre>
+    <p>Above, DOI_OF_SOURCE_ARTICLE, DOI_OF_CORRECTION and DOI_OF_RETRACTION are just dois, not urls.</p>
+    <p>And here's one more thing: the official guidelines state that in order to update the already deposited Crossmark, the xml deposition should be performed in two steps:</p>
+    <ol>
+      <li>the record in question should be deposited with the empty Crossmark element, <code class="language-xml">&lt;crossmark/&gt;</code>;</li>
+      <li>the empty <code class="language-xml">&lt;crossmark/&gt;</code> should be replaced with the one containing the updated metadata, and the resulting xml record should then be deposited.</li>
+    </ol>
+    <p>In my (quite limited though) experience, updating just in one step (skipping the 1st) works just as well. So, actually, Crossmark metadata seems to be updated just as any other Crossref metadata - by uploading the updated xml record with the most up-to-date data.</p>
+  </section>
+  <section id="metadata_examples" class="main-section">
+    <header>Metadata examples</header>
+    <p>Here are some Crossref API requests that allow you to see how the other people structure their (rather complex) doi records and Crossmark metadata. In order for the requests to work properly, you have to <label for="email">enter your email <input type="email" id="email" placeholder="your email"></label> so that Crossref could identify the users and, for example, block the requests if they become problematic.</p>
+    <ul class="api-list">
+      <li>
+        <ul>
+          <li>Article <a role="button" class="api-link">10.1016/j.ssi.2018.12.023</a></li>
+          <li>Correction note <a role="button" class="api-link">10.1016/j.ssi.2021.115608</a></li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>Article <a role="button" class="api-link">10.1039/C7TA02116J</a></li>
+          <li>Retraction note <a role="button" class="api-link">10.1039/d0ta90164d</a></li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>Article <a role="button" class="api-link">10.1039/C7TA00799J</a></li>
+          <li>Correction note <a role="button" class="api-link">10.1039/C9TA90300C</a></li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code class="language-xml" id="api-response">The API request results will appear here</code></pre>
+  </section>
+  <section id="reference_dump" class="main-section">
+    <header>Reference dump</header>
+    <p>Below are the unsorted related references</p>
+    <ul>
+      <li>XML Validator <a href="https://data.crossref.org/reports/parser.html" target="_blank">https://data.crossref.org/reports/parser.html</a></li>
+      <li>Website/PDF widgets <a href="http://crossmark.crossref.org/widget/v2.0/readme.html" target="_blank">http://crossmark.crossref.org/widget/v2.0/readme.html</a></li>
+      <li>On Crossmark in a newer OJS3 <a href="https://docs.pkp.sfu.ca/crossref-ojs-manual/en/crossmark" target="_blank">https://docs.pkp.sfu.ca/crossref-ojs-manual/en/crossmark</a></li>
+      <li>Simple Text Query to find out doi of a structured reference <a href="https://apps.crossref.org/SimpleTextQuery" target="_blank">https://apps.crossref.org/SimpleTextQuery</a></li>
+    </ul>
+  </section>
+</main>
+
+</body>
+
+</html>
