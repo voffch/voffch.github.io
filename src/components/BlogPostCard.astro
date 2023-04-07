@@ -6,13 +6,17 @@ const frontmatter = post.frontmatter;
 
 <div class="card mt-2">
   <div class="card-body">
-    <h5 class="card-title">{frontmatter.title}</h5>
+    <h5 class="card-title"><a href={post.url}>{frontmatter.title}</a></h5>
     <h6 class="card-subtitle mb-2 text-muted">{frontmatter.pubDate.slice(0,10)}</h6>
     <p class="card-text">
       {frontmatter.description}
       <br/>
-      Tagged with: {frontmatter.tags.map((tag, i, tags) => <Tag tag={tag} button={false} />{i < (tags.length - 1) && ', '})}
+      Tagged with: {frontmatter.tags.map((tag, i, tags) => 
+        <>
+          <Tag tag={tag} button={false} />{i < (tags.length - 1) && ', '}
+        </>
+        )}
     </p>
-    <a href={post.url} class="card-link">Read more...</a>
+    {/*<a href={post.url} class="card-link">Read more...</a>*/}
   </div>
 </div>

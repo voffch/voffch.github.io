@@ -1,20 +1,16 @@
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
 import preact from "@astrojs/preact";
 
-// https://astro.build/config
 // import tailwind from "@astrojs/tailwind";
 
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
-// https://astro.build/config
 import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
+import mdx from "@astrojs/mdx";
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://voffch.github.io',
   markdown: {
@@ -40,5 +36,5 @@ export default defineConfig({
       }
     }]]
   },
-  integrations: [preact(), sitemap()] //, tailwind()
+  integrations: [preact(), sitemap(), mdx()] //, tailwind()
 });

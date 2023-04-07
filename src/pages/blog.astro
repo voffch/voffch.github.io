@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/Base.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
-const allPosts = await Astro.glob('../pages/blog/*.md');
+const allPosts = await Astro.glob('../pages/blog/*.md*');
 allPosts.sort((p1, p2) => p1.frontmatter.pubDate > p2.frontmatter.pubDate ? -1 : 1);
 const pageTitle = "Blog";
 ---
