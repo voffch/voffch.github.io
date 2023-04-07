@@ -29,6 +29,10 @@ const prevPathname = allPathnames[thisPostIndex - 1];
   .markdown-post img {
     max-width: 100%;
   }
+  blockquote {
+    border-left: 3px solid lightgray;
+    padding-left: 1em;
+  }
 </style>
 <BaseLayout pageTitle={frontmatter.title} description={frontmatter.description} category='blog'>
   <p class="text-center text-muted">Published on: {frontmatter.pubDate.slice(0,10)}</p>

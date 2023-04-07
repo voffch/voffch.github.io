@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Conference Landing Page</title>
+  <meta name="description" content="A landing for a mock nth International Conference on Putting Things on Top of Other Things">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-family: "PT Sans", sans-serif;
+}
+p {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 0.8rem 0;
+}
+.material-icons {
+  font-size: 48px;
+}
+body, html {
+  margin: 0;
+  min-height: 100%;
+  min-width: 360px;
+}
+header, main, footer {
+  width: 100%;
+}
+header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background: whitesmoke;
+  padding: 1rem;
+}
+h1 {
+  font-size: max(1.5rem, 2.5vw);
+  margin: 0 auto 1rem auto;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 span {
+  margin-left: 1rem;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin: 1rem auto 0.5rem auto;
+  padding: 0;
+}
+nav ul:before,
+nav ul:after {
+  content: "";
+  margin-top: 3px;
+  border-bottom: 2px dotted darkred;
+  flex: 1 1 0;
+}
+nav ul a {
+  font-size: 1.3rem;
+  padding: 0.4rem;
+  border-radius: 8px;
+  border: none;
+}
+main {
+  margin-top: 7rem;
+}
+#info {
+  background-color: white;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  max-width: 80ch;
+  margin: 0 auto;
+}
+.info-item p {
+  margin-left: 1rem;
+}
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.3rem;
+}
+.committee-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.committee-card {
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid darkgrey;
+  border-radius: 5px;
+}
+.committee-card h3 {
+  background: lightgray;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 1rem 0;
+}
+.committee-card img {
+  width: 100%;
+}
+.video-description {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+#video {
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.fees-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.fees-card {
+  flex-basis: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid gold;
+  border-radius: 5px;
+  text-align: center;
+}
+.fees-card > * {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.fee {
+  font-size: 1.5rem;
+}
+.fees-card input[type="button"] {
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: darkred;
+  background-color: whitesmoke;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+.fees-card input[type="button"]:hover {
+  background-color: lightsalmon;
+  color: whitesmoke;
+}
+#form {
+  width: 100%;
+}
+#email {
+  display: block;
+  width: 30%;
+  min-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.3rem;
+}
+#submit {
+  display: block;
+  width: 20%;
+  min-width: 200px;
+  margin: 0.3rem auto 0;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.2rem 0;
+  color: darkred;
+  cursor: pointer;
+  border: 1px dashed brown;
+}
+#submit:hover {
+  background-color: lightsalmon;
+  color: whitesmoke;
+}
+#venue-image {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/c1/Mikhail_Clodt_Village_in_the_province_of_Orel.jpg");
+}
+#transportation-image {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/f/fc/Mikhail_Clodt_Peasant.jpg");
+}
+#registration-image {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Drie_regentessen_en_de_binnenmoeder_van_het_leprozenhuis_te_Amsterdam_Rijksmuseum_SK-C-419.jpeg/1280px-Drie_regentessen_en_de_binnenmoeder_van_het_leprozenhuis_te_Amsterdam_Rijksmuseum_SK-C-419.jpeg");
+}
+.parallax-image {
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+  opacity: 0.9;
+}
+.caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #d7d7d7aa;
+  padding: 1.5rem;
+}
+.caption h2 {
+  font-size: 3rem;
+  color: darkred;
+  margin: 0;
+}
+section {
+  padding: 2rem 1rem;
+}
+section > p {
+  max-width: 70ch;
+  margin: 0 auto;
+}
+footer {
+  background: darkgray;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+footer ul {
+  list-style: none;
+}
+footer li {
+  display: inline;
+  margin-left: 0.5em;
+}
+a, a:visited {
+  text-decoration: none;
+  color: darkred;
+}
+a:hover {
+  border: none;
+  background-color: salmon;
+  color: ghostwhite;
+}
+@media only screen and (max-device-width: 1000px) {
+  .parallax-image {
+    background-attachment: scroll;
+  }
+}
+@media all and (max-width: 530px) {
+  nav ul:before,
+  nav ul:after {
+    content: none;
+  }
+}
+@media all and (max-width: 475px) {
+  main {
+    margin-top: 11rem;
+  }
+}
+@media all and (max-width: 365px) {
+  main {
+    margin-top: 13rem;
+  }
+}
+</style>
+</head>
+<body>
+<header id="header">
+  <h1><img id="header-img" title="Brateevsky, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" width="32" alt="Mos-wikiconf-2014-red icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Mos-wikiconf-2014-red_icon.svg/32px-Mos-wikiconf-2014-red_icon.svg.png"><span>n<sup>th</sup> International Conference on Putting Things on Top of Other Things</span></h1>
+  <nav id="nav-bar">
+    <ul>
+      <li><a class="nav-link" href="#">Info</a></li>
+      <li><a class="nav-link" href="#venue-image">Venue</a></li>
+      <li><a class="nav-link" href="#transportation-image">Transportation</a></li>
+      <li><a class="nav-link" href="#registration-image">Registration</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section id="info">
+    <h2>General Information</h2>
+    <div class="info-item">
+      <span class="material-icons">badge</span>
+      <p>We invite you to participate at the n<sup>th</sup> International Conference on Putting Things on Top of Other Things, which  will be held between n<sup>th</sup> and m<sup>th</sup> of Januamber in the village of Luxury Resort.</p>
+    </div>
+    <div class="info-item">
+      <span class="material-icons">people_outline</span>
+      <p>The conference offers a platform where the scientists, researchers and other unemployed people discuss various aspects and methods of putting things on top of other things.</p>
+    </div>
+    <div class="info-item">
+      <span class="material-icons">contact_support</span>
+      <p>I wanted to say something here as well but suddenly forgot what that was.</p>
+    </div>
+    <h2>Organizing Committee</h2>
+    <div class="committee-wrapper">
+      <div class="committee-card">
+        <h3>Chairman</h3>
+        <img width="256" title="Photograph by Oren Jack Turner, Princeton, N.J. Original image cleaned/leveled by User:Jaakobou., Public domain, via Wikimedia Commons" alt="Albert Einstein Head cleaned" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/388px-Albert_Einstein_Head_cleaned.jpg">
+        <p>Dr. Habil., Professor</p>
+      </div>
+      <div class="committee-card">
+        <h3>Secretary</h3>
+        <img width="256" title="William-Adolphe Bouguereau, Public domain, via Wikimedia Commons" alt="Peasant Woman - Adolphe-William Bouguereau - 1869 - 2021-05-10" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Peasant_Woman_-_Adolphe-William_Bouguereau_-_1869_-_2021-05-10.jpg/380px-Peasant_Woman_-_Adolphe-William_Bouguereau_-_1869_-_2021-05-10.jpg">
+        <p>Dr., Associate Professor</p>
+      </div>
+    </div>
+    <p class="video-description">Our other members figure in this annual Organizing Committee meeting:</p>
+    <iframe id="video" width="560" height="315" src="https://www.youtube-nocookie.com/embed/LFrdqQZ8FFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </section>
+
+  <div id="venue-image" class="parallax-image">
+    <div class="caption"><h2>Venue &amp; Lodging</h2></div>
+  </div>
+  <section id="venue">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac sapien pharetra mi luctus semper vel nec mauris. Praesent ex nibh, molestie vitae consequat ac, auctor id arcu. Sed iaculis ligula feugiat, facilisis lorem vitae, luctus dui. Vivamus finibus in odio at mollis. Donec in nunc non ipsum convallis pulvinar eu sed mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec vel nulla sed leo tincidunt aliquet in non mauris. Pellentesque ut sodales risus, et maximus tellus. Praesent congue felis felis, eget gravida nisl mattis nec.</p>
+  </section>
+
+  <div id="transportation-image" class="parallax-image">
+    <div class="caption"><h2>Transportation</h2></div>
+  </div>
+  <section id="transportation">
+    <p>Maecenas ut tortor erat. Nulla viverra orci diam, id molestie justo sodales sit amet. Sed sed gravida orci, in consectetur purus. Aliquam facilisis finibus varius. Nulla semper sapien eu nulla convallis, facilisis condimentum massa maximus. Mauris justo mi, laoreet sit amet dui nec, accumsan imperdiet arcu. Quisque non velit lobortis, egestas sem at, dictum ligula. Proin mollis urna lacus, eu pharetra sem ornare ut. Nullam id consequat felis, non viverra sem. Aliquam interdum sed dolor quis scelerisque.</p>
+  </section>
+
+  <div id="registration-image" class="parallax-image">
+    <div class="caption"><h2>Registration</h2></div>
+  </div>
+  <section id="registration">
+    <p>Phasellus rutrum maximus dui, vitae elementum lectus blandit sit amet. Mauris odio turpis, iaculis vitae metus at, volutpat pulvinar dui. Duis mi velit, pellentesque eu sapien eget, bibendum sodales lectus. Sed suscipit nisi eu nunc bibendum lacinia. Proin varius suscipit vehicula. Suspendisse potenti. Phasellus ac sem ultrices, vulputate augue at, lacinia diam. Morbi eget malesuada tellus. Nunc consectetur fringilla posuere. Phasellus vestibulum id ipsum non commodo. In nec justo diam. Phasellus ut pharetra magna, et condimentum nibh. Nam varius scelerisque enim congue pretium.</p>
+    <h2>Registration Fees</h2>
+    <div class="fees-container">
+      <div class="fees-card">
+        <h3>Student</h3>
+        <div class="fee">300$</div>
+        <span class="material-icons">savings</span>
+        <p>For students only</p>
+        <input type="button" value="Pay">
+      </div>
+      <div class="fees-card">
+        <h3>Regular</h3>
+        <div class="fee">500$</div>
+        <span class="material-icons">credit_card</span>
+        <p>This is a price normal people pay</p>
+        <input type="button" value="Pay more">
+      </div>
+      <div class="fees-card">
+        <h3>Exorbitant</h3>
+        <div class="fee">1000$</div>
+        <span class="material-icons">paid</span>
+        <p>For those living high on the hog</p>
+        <input type="button" value="Pay even more">
+      </div>
+    </div>
+    <h2>Register Now</h2>
+    <form id="form" action="https://www.freecodecamp.com/email-submit">
+      <label for="email"><input id="email" type="email" name="email" placeholder="Enter your email address"></label>
+      <input id="submit" type="submit" value="Register" disabled>
+    </form>
+  </section>
+</main>
+<footer>
+  <ul>
+    <li><a href="#">What?</a></li>
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+  <div>
+  © Very Poor Conference Organizers, Inc.<br>
+  The images are Public Domain (hosted by Wikimedia Commons)
+  </div>
+</footer>
+</body>
+
+</html>
