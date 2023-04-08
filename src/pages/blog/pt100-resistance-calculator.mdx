@@ -1,0 +1,42 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Pt100 sensor R <-> T'
+pubDate: 2023-04-08
+description: "Resistance <-> Temperature conversion for a Pt100 sensor"
+tags: ["astro", "webdev", "calculator", "science", "equipment"]
+---
+import Pt100Calculator from "../../components/Pt100Calculator.jsx"
+
+<Pt100Calculator client:load="preact" />
+
+This week, we needed to convert the resistances of some Chinese "*heraeus*" Pt100 resistors to temperatures. It turned out that the [Callendar–Van Dusen equation](https://en.wikipedia.org/wiki/Callendar%E2%80%93Van_Dusen_equation) built-in in a LabVIEW function, from which I stole the previous iteration of my converter, works only for the temperatures above zero.
+
+> Aha!
+
+said I, this is a perfect opportunity to test the [Astro-MDX integration](https://docs.astro.build/en/guides/markdown-content/). And here we are.
+
+The equations I used are as follows (JS):
+
+```javascript
+// converting (t / °C) to (r / Ohm)
+const R0 = 100;
+const a = 3.9083e-3;
+const b = -5.775e-7;
+const c = -4.183e-12;
+let r = 0;
+if (t > 0) {
+  r = R0 * (1 + a*t + b*Math.pow(t, 2));
+} else {
+  r = R0 * (1 + a*t + b*Math.pow(t, 2) + c*Math.pow(t, 3)*(t - 100));
+}
+// converting (r / Ohm) to (t / °C)
+if (r > 100) {
+  t = 3383.809524 - .8658008658e-1*Math.sqrt(1758480889. - 2310000.*r);
+} else {
+  t = .172184658699642e-7*Math.pow(r, 4) - .995479323918948e-5*Math.pow(r, 3) + .285795641832195e-2*Math.pow(r, 2) + 2.21610504733757*r - 241.959043339973;
+}
+```
+
+The `t=f(r)` equation above 0 °C (100 Ohm) is an exact solution of the corresponding `r=f(t)`. Below zero, however, `r=f(t)` is an unsolveable 4th-order mess, so `t=f(r)` in this range was found by fitting the 4th order polynomial to the points calculated with `r=f(t)`.
+
+Strictly speaking, these equations are for the particular IEC-60751-compliant RTDs only, but your typical uncalibrated RTDs from Aliexpress are Class B at best, with an error around several tenth of K, so who cares.
