@@ -19,14 +19,16 @@ export default function Pt100Calculator() {
 
   const handleResistance = (rtext) => {
     const r = parseFloat(rtext);
-    let t = celsius ? 0 : 273.15;
-    if (r > 100) {
-      t += 3383.809524 - .8658008658e-1*Math.sqrt(1758480889. - 2310000.*r);
-    } else {
-      t += .172184658699642e-7*Math.pow(r, 4) - .995479323918948e-5*Math.pow(r, 3) + .285795641832195e-2*Math.pow(r, 2) + 2.21610504733757*r - 241.959043339973;
-    }
-    setResistance(r);
-    setTemperature(t);
+    if (!isNaN(r)) {
+      let t = celsius ? 0 : 273.15;
+      if (r > 100) {
+        t += 3383.809524 - .8658008658e-1*Math.sqrt(1758480889. - 2310000.*r);
+      } else {
+        t += .172184658699642e-7*Math.pow(r, 4) - .995479323918948e-5*Math.pow(r, 3) + .285795641832195e-2*Math.pow(r, 2) + 2.21610504733757*r - 241.959043339973;
+      }
+      setResistance(r);
+      setTemperature(t);
+    } // to prevent accidentally turning both R and T into NaNs, in lieu of proper validation
   }
 
   const handleTemperature = (ttext) => {
