@@ -24,13 +24,13 @@ const a = 3.9083e-3;
 const b = -5.775e-7;
 const c = -4.183e-12;
 let r = 0;
-if (t > 0) {
+if (t >= 0) {
   r = R0 * (1 + a*t + b*Math.pow(t, 2));
 } else {
   r = R0 * (1 + a*t + b*Math.pow(t, 2) + c*Math.pow(t, 3)*(t - 100));
 }
 // converting (r / Ohm) to (t / °C)
-if (r > 100) {
+if (r >= 100) {
   t = 3383.809524 - .8658008658e-1*Math.sqrt(1758480889. - 2310000.*r);
 } else {
   t = .172184658699642e-7*Math.pow(r, 4) - .995479323918948e-5*Math.pow(r, 3) + .285795641832195e-2*Math.pow(r, 2) + 2.21610504733757*r - 241.959043339973;
