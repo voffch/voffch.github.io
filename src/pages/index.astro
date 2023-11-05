@@ -28,7 +28,13 @@ const pageTitle = "Home";
 <BaseLayout pageTitle={pageTitle} category='home'>
 	<p class="text-center display-6">This is a website that nobody will see because I haven't told anyone about it. Feel free to explore!</p>
 	<p class="text-center display-1"><i class="bi bi-house-door"></i></p>
-	<div class="text-center display-3">
-		<Greeting client:load="preact" messages={["Hej", "Hallo", "Hola", "Hi", "Hello", "Howdy", "Hey there"]} />
-	</div>
+	<h2 class="text-center">Quote of the year:</h2>
+	<figure class="text-center">
+		<blockquote class="blockquote">
+			<p>But the machine man, driving a dead tractor on land he does not know and love, understands only chemistry; and he is contemptuous of the land and of himself.</p>
+		</blockquote>
+		<figcaption class="blockquote-footer">
+			John Steinbeck, <cite title="Source Title">The Grapes of Wrath</cite>
+		</figcaption>
+	</figure>
 </BaseLayout>
