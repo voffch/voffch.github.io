@@ -6,7 +6,7 @@ description: "A mock conference landing page"
 tags: ["webdev", "science", "personal", "ha ha"]
 ---
 
-Some time ago, I got tired of our conference webpage, which was hosted on a website of our, well, *institution* [here](https://insma.urfu.ru/science/conf/ruten) (I won't even try to explain the relationship between the said *institution*, the uni and the department for fear of being *institutionalized* as a result). That website is a terminally outdated Joomla, Web 1.0 and stuff. So I spent a day ~~shitcoding~~ hardcoding `html+css` for a simple landing page, here (at the time of writing):
+Some time ago, I got tired of our conference webpage, which was hosted on a website of our, well, *institution* [here](https://web.archive.org/web/20230609103242/https://insma.urfu.ru/science/conf/ruten/) (I won't even try to explain the relationship between the said *institution*, the uni and the department for fear of being *institutionalized* as a result). That website is a terminally outdated Joomla, Web 1.0 and stuff. So I spent a day ~~shitcoding~~ hardcoding `html+css` for a simple landing page, here (at the time of writing):
 
 **[conferenceusu.github.io](https://conferenceusu.github.io/)**
 
