@@ -1,0 +1,61 @@
+---
+const { src, centered=0 } = Astro.props;
+const imgID = "#blog-img-" + Math.floor(Math.random() * 10000);
+---
+<style>
+.blog-img {
+  max-width: 100%;
+  cursor: zoom-in;
+  margin-bottom: 1rem;
+}
+.blog-img-centered,
+.blog-img-modal {
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+.blog-img-modal {
+  width: 100%;
+  height: auto;
+  cursor: zoom-out;
+}
+.modal-dialog {
+  margin: 10px auto;
+  max-width: calc(100% - 20px);
+  cursor: zoom-out;
+}
+</style>
+
+<blog-img data-id={imgID}>
+
+  <img class={centered != 0 ? "blog-img blog-img-centered" : "blog-img"} src={src} />
+
+  <div class="modal" id={imgID}>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+  
+        <div class="modal-body">
+          <img data-bs-dismiss="modal" class="blog-img blog-img-modal" src={src} />
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+</blog-img>
+
+<script>
+  import Modal from 'bootstrap/js/dist/modal';
+  class BlogImg extends HTMLElement {
+    constructor() {
+      super();
+
+      const imgID = this.dataset.id;
+      const img = this.querySelector('.blog-img');
+      const myModal = new Modal(document.getElementById(imgID));
+      img.addEventListener('click', () => {
+        myModal.show();
+      });
+    }
+  }
+  customElements.define('blog-img', BlogImg);
+</script>
